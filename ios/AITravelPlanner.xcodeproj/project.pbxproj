@@ -14,6 +14,12 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-AITravelPlanner-AITravelPlannerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-AITravelPlanner-AITravelPlannerTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		5C707ABC629143FD99E8D394 /* Outfit-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B44C20C51C144F9AFDCBDC3 /* Outfit-Bold.ttf */; };
+		BDCF11A2E4964F4F878831E6 /* Outfit-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B1C551C50A647C5BFD0E87E /* Outfit-Medium.ttf */; };
+		401643937C19452B8CA00298 /* Outfit-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC184BEB9DD7415894F7793F /* Outfit-Regular.ttf */; };
+		68636906D61740B19C8D0EF0 /* SpaceMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7BD660E86694AD5ACC2F6CA /* SpaceMono-Regular.ttf */; };
+		B37167E5B4334A819336C227 /* NerkoOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4829197548494CFDA96290FB /* NerkoOne-Regular.ttf */; };
+		4AB6E728FFEA43AFA8242AD7 /* PlaywriteCU-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC701E6D21594D92AFFD359A /* PlaywriteCU-VariableFont_wght.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +51,12 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = AITravelPlanner/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-AITravelPlanner-AITravelPlannerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AITravelPlanner-AITravelPlannerTests.release.xcconfig"; path = "Target Support Files/Pods-AITravelPlanner-AITravelPlannerTests/Pods-AITravelPlanner-AITravelPlannerTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		1B44C20C51C144F9AFDCBDC3 /* Outfit-Bold.ttf */ = {isa = PBXFileReference; name = "Outfit-Bold.ttf"; path = "../src/assets/fonts/Outfit-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1B1C551C50A647C5BFD0E87E /* Outfit-Medium.ttf */ = {isa = PBXFileReference; name = "Outfit-Medium.ttf"; path = "../src/assets/fonts/Outfit-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CC184BEB9DD7415894F7793F /* Outfit-Regular.ttf */ = {isa = PBXFileReference; name = "Outfit-Regular.ttf"; path = "../src/assets/fonts/Outfit-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E7BD660E86694AD5ACC2F6CA /* SpaceMono-Regular.ttf */ = {isa = PBXFileReference; name = "SpaceMono-Regular.ttf"; path = "../src/assets/fonts/SpaceMono-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4829197548494CFDA96290FB /* NerkoOne-Regular.ttf */ = {isa = PBXFileReference; name = "NerkoOne-Regular.ttf"; path = "../src/assets/fonts/NerkoOne-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		AC701E6D21594D92AFFD359A /* PlaywriteCU-VariableFont_wght.ttf */ = {isa = PBXFileReference; name = "PlaywriteCU-VariableFont_wght.ttf"; path = "../src/assets/fonts/PlaywriteCU-VariableFont_wght.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +136,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				5E2CFEE004004F1DA3D13AC7 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -149,6 +162,20 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		5E2CFEE004004F1DA3D13AC7 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				1B44C20C51C144F9AFDCBDC3 /* Outfit-Bold.ttf */,
+				1B1C551C50A647C5BFD0E87E /* Outfit-Medium.ttf */,
+				CC184BEB9DD7415894F7793F /* Outfit-Regular.ttf */,
+				E7BD660E86694AD5ACC2F6CA /* SpaceMono-Regular.ttf */,
+				4829197548494CFDA96290FB /* NerkoOne-Regular.ttf */,
+				AC701E6D21594D92AFFD359A /* PlaywriteCU-VariableFont_wght.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -245,6 +272,12 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				5C707ABC629143FD99E8D394 /* Outfit-Bold.ttf in Resources */,
+				BDCF11A2E4964F4F878831E6 /* Outfit-Medium.ttf in Resources */,
+				401643937C19452B8CA00298 /* Outfit-Regular.ttf in Resources */,
+				68636906D61740B19C8D0EF0 /* SpaceMono-Regular.ttf in Resources */,
+				B37167E5B4334A819336C227 /* NerkoOne-Regular.ttf in Resources */,
+				4AB6E728FFEA43AFA8242AD7 /* PlaywriteCU-VariableFont_wght.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
