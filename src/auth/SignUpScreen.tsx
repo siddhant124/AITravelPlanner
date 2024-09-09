@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {
   View,
   Text,
@@ -5,12 +6,62 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  ToastAndroid,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {Colors} from '../constants/Colors';
 import {ArrowLongLeftIcon} from 'react-native-heroicons/solid';
+import {createUserWithEmailAndPassword} from 'firebase/auth';
+import {auth} from '../configs/FirebaseConfing';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function SignUpScreen({navigation}: {navigation: any}) {
+  const [userName, setUserName] = useState('');
+  const [userEmail, setuserEmail] = useState('');
+  const [userPassword, setUserpassword] = useState('');
+  const [isCreatingAccount, setIsCreatingAccount] = useState(false);
+
+  const handleCreateAcount = () => {
+    if (!userEmail && !userPassword && !userName) {
+      ToastAndroid.show('Please Enter all Details', ToastAndroid.LONG);
+      return;
+    }
+
+    setIsCreatingAccount(true);
+    createUserWithEmailAndPassword(auth, userEmail, userPassword)
+      .then(async userCredential => {
+        // Signed up
+        const user = userCredential.user;
+        ToastAndroid.show('Account created successsfully', ToastAndroid.LONG);
+        console.log('user details', user);
+        AsyncStorage.setItem('authToken', await user.getIdToken(false));
+        navigation.navigate('HomeScreen');
+      })
+      .catch(error => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log('Error Code', errorCode);
+        console.log('Error Message', errorMessage);
+        switch (errorCode) {
+          case 'auth/invalid-email':
+            return ToastAndroid.show(
+              'Please enter valid email address',
+              ToastAndroid.LONG,
+            );
+
+          case 'auth/email-already-in-use':
+            return ToastAndroid.show(
+              'User already exist, please SignIn',
+              ToastAndroid.LONG,
+            );
+
+          default:
+            return ToastAndroid.show(errorMessage, ToastAndroid.LONG);
+        }
+      })
+      .finally(() => setIsCreatingAccount(false));
+  };
+
   return (
     <>
       <StatusBar
@@ -37,6 +88,9 @@ export default function SignUpScreen({navigation}: {navigation: any}) {
             inputMode="text"
             style={styles.input}
             placeholder="Enter Full Name"
+            onChangeText={event => {
+              setUserName(event);
+            }}
           />
         </View>
 
@@ -47,6 +101,9 @@ export default function SignUpScreen({navigation}: {navigation: any}) {
             keyboardType="email-address"
             style={styles.input}
             placeholder="Enter Email"
+            onChangeText={event => {
+              setuserEmail(event);
+            }}
           />
         </View>
 
@@ -57,11 +114,22 @@ export default function SignUpScreen({navigation}: {navigation: any}) {
             secureTextEntry={true}
             style={styles.input}
             placeholder="Enter Password"
+            onChangeText={event => {
+              setUserpassword(event);
+            }}
           />
         </View>
 
         {/* Create Account Button */}
-        <TouchableOpacity activeOpacity={0.6} style={styles.buttonStyle}>
+        <TouchableOpacity
+          activeOpacity={isCreatingAccount ? 1 : 0.6}
+          style={[
+            styles.buttonStyle,
+            {backgroundColor: isCreatingAccount ? Colors.Gray : Colors.PRIMARY},
+          ]}
+          onPress={() => {
+            !isCreatingAccount && handleCreateAcount();
+          }}>
           <Text style={styles.buttonTextStyle}>Create Account</Text>
         </TouchableOpacity>
 
@@ -74,7 +142,7 @@ export default function SignUpScreen({navigation}: {navigation: any}) {
           }}
           style={[styles.buttonStyle, styles.signInButton]}>
           <Text style={[styles.buttonTextStyle, styles.signInText]}>
-            Sign In
+            {isCreatingAccount ? 'Creating account...' : 'Sign In'}
           </Text>
         </TouchableOpacity>
       </View>
