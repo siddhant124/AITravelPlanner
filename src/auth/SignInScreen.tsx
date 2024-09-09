@@ -6,12 +6,59 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  ToastAndroid,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {Colors} from '../constants/Colors';
 import {ArrowLongLeftIcon} from 'react-native-heroicons/solid';
+import {signInWithEmailAndPassword} from 'firebase/auth';
+import {auth} from '../configs/FirebaseConfing';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function SignInScreen({navigation}: {navigation: any}) {
+  const [userEmail, setuserEmail] = useState('');
+  const [userPassword, setUserpassword] = useState('');
+  const [isSigningIn, seIsSigningIn] = useState(false);
+
+  const handleSignInUser = () => {
+    if (!userEmail && !userPassword) {
+      ToastAndroid.show('Please Enter all Details', ToastAndroid.LONG);
+      return;
+    }
+    seIsSigningIn(true);
+    signInWithEmailAndPassword(auth, userEmail, userPassword)
+      .then(async userCredential => {
+        // Signed in
+        const user = userCredential.user;
+        ToastAndroid.show('LogIn successful', ToastAndroid.LONG);
+        console.log('User', user);
+        AsyncStorage.setItem('authToken', await user.getIdToken(false));
+        navigation.navigate('HomeScreen');
+      })
+      .catch(error => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        console.log('Error Code', errorCode);
+        console.log('Error Message', errorMessage);
+
+        switch (errorCode) {
+          case 'auth/invalid-email':
+            return ToastAndroid.show(
+              'Please enter valid email address',
+              ToastAndroid.LONG,
+            );
+
+          case 'auth/invalid-credential':
+            return ToastAndroid.show('Invalid credential', ToastAndroid.LONG);
+
+          default:
+            return ToastAndroid.show(errorMessage, ToastAndroid.LONG);
+        }
+      })
+      .finally(() => seIsSigningIn(false));
+  };
+
   return (
     <>
       <StatusBar
@@ -40,6 +87,9 @@ export default function SignInScreen({navigation}: {navigation: any}) {
             keyboardType="email-address"
             style={styles.input}
             placeholder="Enter Email"
+            onChangeText={event => {
+              setuserEmail(event);
+            }}
           />
         </View>
 
@@ -50,12 +100,25 @@ export default function SignInScreen({navigation}: {navigation: any}) {
             secureTextEntry={true}
             style={styles.input}
             placeholder="Enter Password"
+            onChangeText={event => {
+              setUserpassword(event);
+            }}
           />
         </View>
 
         {/* Sign In Button */}
-        <TouchableOpacity activeOpacity={0.6} style={styles.buttonStyle}>
-          <Text style={styles.buttonTextStyle}>Sign In</Text>
+        <TouchableOpacity
+          activeOpacity={isSigningIn ? 1 : 0.6}
+          style={[
+            styles.buttonStyle,
+            {
+              backgroundColor: isSigningIn ? Colors.Gray : Colors.PRIMARY,
+            },
+          ]}
+          onPress={() => !isSigningIn && handleSignInUser()}>
+          <Text style={styles.buttonTextStyle}>
+            {isSigningIn ? 'Signing In...' : 'Sign In'}
+          </Text>
         </TouchableOpacity>
 
         {/* Sign Up */}
@@ -114,7 +177,6 @@ const styles = StyleSheet.create({
   buttonStyle: {
     padding: 15,
     alignItems: 'center',
-    backgroundColor: Colors.PRIMARY,
     borderRadius: 15,
     marginTop: '25%',
   },

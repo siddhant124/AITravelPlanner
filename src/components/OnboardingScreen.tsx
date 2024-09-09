@@ -4,12 +4,46 @@ import {
   Text,
   StyleSheet,
   StatusBar,
+  BackHandler,
   TouchableOpacity,
+  ToastAndroid,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {Colors} from '../constants/Colors';
 
 export default function OnboardingScreen({navigation}: {navigation: any}) {
+  const [backPressedOnce, setBackPressedOnce] = useState(false);
+
+  useEffect(() => {
+    const handleBackPress = () => {
+      if (backPressedOnce) {
+        // Exit the app if back is pressed again within 2 seconds
+        BackHandler.exitApp();
+        return true;
+      } else {
+        // Show toast and set backPressedOnce to true
+        ToastAndroid.show('Press again to exit', ToastAndroid.SHORT);
+        setBackPressedOnce(true);
+
+        // Reset backPressedOnce after 2 seconds
+        setTimeout(() => {
+          setBackPressedOnce(false);
+        }, 2000);
+
+        return true; // Prevent the default back button behavior
+      }
+    };
+
+    // Adding the back press event listener
+    BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+
+    // Cleanup: Remove the event listener on component unmount
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
+    };
+  }, [backPressedOnce]);
+
+
   return (
     <>
       <StatusBar
@@ -32,7 +66,9 @@ export default function OnboardingScreen({navigation}: {navigation: any}) {
 
           <TouchableOpacity
             activeOpacity={0.6}
-            onPress={() => navigation.navigate('SignInScreen')}
+            onPress={() => {
+              navigation.navigate('SignInScreen');
+            }}
             style={style.buttonStyle}>
             <Text style={style.buttonTextStyle}>Get Started</Text>
           </TouchableOpacity>
