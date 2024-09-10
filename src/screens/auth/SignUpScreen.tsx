@@ -9,11 +9,11 @@ import {
   ToastAndroid,
 } from 'react-native';
 import React, {useState} from 'react';
-import {Colors} from '../constants/Colors';
 import {ArrowLongLeftIcon} from 'react-native-heroicons/solid';
 import {createUserWithEmailAndPassword} from 'firebase/auth';
-import {auth} from '../configs/FirebaseConfing';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { auth } from '../../configs/FirebaseConfing';
+import { Colors } from '../../constants/Colors';
 
 export default function SignUpScreen({navigation}: {navigation: any}) {
   const [userName, setUserName] = useState('');
@@ -35,7 +35,7 @@ export default function SignUpScreen({navigation}: {navigation: any}) {
         ToastAndroid.show('Account created successsfully', ToastAndroid.LONG);
         console.log('user details', user);
         AsyncStorage.setItem('authToken', await user.getIdToken(false));
-        navigation.navigate('HomeScreen');
+        navigation.navigate('HomeStackNavigator');
       })
       .catch(error => {
         const errorCode = error.code;

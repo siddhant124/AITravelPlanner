@@ -2,12 +2,12 @@
 import React, {useEffect, useState} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
-import OnboardingScreen from './src/components/OnboardingScreen';
-import SignInScreen from './src/auth/SignInScreen';
-import SignUpScreen from './src/auth/SignUpScreen';
-import {HomeScreen} from './src/components/HomeScreen';
+import OnboardingScreen from './src/screens/onboarding/OnboardingScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {ActivityIndicator, View} from 'react-native';
+import SignInScreen from './src/screens/auth/SignInScreen';
+import SignUpScreen from './src/screens/auth/SignUpScreen';
+import HomeStackNavigator from './src/screens/home/HomeStackNavigator';
 
 const Stack = createNativeStackNavigator();
 
@@ -49,12 +49,15 @@ export default function RootLayout() {
       <Stack.Navigator
         screenOptions={{headerShown: false}}
         initialRouteName={
-          authToken === null ? 'OnboardingScreen' : 'HomeScreen'
+          authToken === null ? 'OnboardingScreen' : 'HomeStackNavigator'
         }>
         <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />
         <Stack.Screen name="SignInScreen" component={SignInScreen} />
         <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        <Stack.Screen
+          name="HomeStackNavigator"
+          component={HomeStackNavigator}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

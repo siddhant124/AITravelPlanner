@@ -9,11 +9,11 @@ import {
   ToastAndroid,
 } from 'react-native';
 import React, {useState} from 'react';
-import {Colors} from '../constants/Colors';
 import {ArrowLongLeftIcon} from 'react-native-heroicons/solid';
 import {signInWithEmailAndPassword} from 'firebase/auth';
-import {auth} from '../configs/FirebaseConfing';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Colors } from '../../constants/Colors';
+import { auth } from '../../configs/FirebaseConfing';
 
 export default function SignInScreen({navigation}: {navigation: any}) {
   const [userEmail, setuserEmail] = useState('');
@@ -33,7 +33,7 @@ export default function SignInScreen({navigation}: {navigation: any}) {
         ToastAndroid.show('LogIn successful', ToastAndroid.LONG);
         console.log('User', user);
         AsyncStorage.setItem('authToken', await user.getIdToken(false));
-        navigation.navigate('HomeScreen');
+        navigation.navigate('HomeStackNavigator');
       })
       .catch(error => {
         const errorCode = error.code;

@@ -8,8 +8,8 @@ import {
   TouchableOpacity,
   ToastAndroid,
 } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import {Colors} from '../constants/Colors';
+import React, {useEffect, useState} from 'react';
+import {Colors} from '../../constants/Colors';
 
 export default function OnboardingScreen({navigation}: {navigation: any}) {
   const [backPressedOnce, setBackPressedOnce] = useState(false);
@@ -43,7 +43,6 @@ export default function OnboardingScreen({navigation}: {navigation: any}) {
     };
   }, [backPressedOnce]);
 
-
   return (
     <>
       <StatusBar
@@ -54,7 +53,7 @@ export default function OnboardingScreen({navigation}: {navigation: any}) {
       <View style={style.viewStyle}>
         <Image
           style={style.imageStyle}
-          source={require('./../assets/images/login_image.png')}
+          source={require('./../../assets/images/login_image.png')}
         />
 
         <View style={style.container}>
