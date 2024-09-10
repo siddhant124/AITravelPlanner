@@ -10,7 +10,7 @@ import {
   Button,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {Colors} from '../constants/Colors';
+import {Colors} from '../../constants/Colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const HomeScreen = ({navigation}: {navigation: any}) => {
