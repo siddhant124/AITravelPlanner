@@ -204,16 +204,26 @@ export default function SearchPlacesScreen({navigation}: {navigation: any}) {
         <View className="flex-1 justify-center top-[-55] items-center gap-3">
           <MapPinIcon size={60} color={Colors.PRIMARY} />
           <Text
-            className="text-lg text-black"
+            className="text-lg"
             style={{
               fontFamily: 'Outfit-Medium',
+              color: Colors.Gray,
             }}>
-            {'Search Places Here'}
+            {'No Places Selected'}
           </Text>
         </View>
       ) : (
-        tripData?.locationInfo?.name && (
+        tripData?.locationInfo?.name &&
+        !showSearch && (
           <View className="flex-1 justify-center top-[-55] items-center gap-3">
+            <Text
+              style={{
+                color: Colors.PRIMARY,
+                fontFamily: 'Outfit-Medium',
+                fontSize: 17,
+              }}>
+              Select Traveller Now
+            </Text>
             <TouchableOpacity
               activeOpacity={0.6}
               style={{
@@ -229,7 +239,14 @@ export default function SearchPlacesScreen({navigation}: {navigation: any}) {
                   fontFamily: 'Outfit-Regular',
                   fontSize: 17,
                 }}>
-                Continue to select TRAVELLER
+                Continue with {'  '}
+                <Text
+                  style={{
+                    textAlign: 'center',
+                    fontFamily: 'Outfit-Bold',
+                  }}>
+                  {tripData?.locationInfo?.name}
+                </Text>
               </Text>
             </TouchableOpacity>
           </View>
