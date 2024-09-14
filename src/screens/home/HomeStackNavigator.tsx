@@ -2,7 +2,6 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import MyTripScreen from './MyTripScreen';
 import DiscoverScreen from './DiscoverScreen';
 import ProfileScreen from './ProfileScreen';
 import {
@@ -11,6 +10,7 @@ import {
   UserCircleIcon,
 } from 'react-native-heroicons/solid';
 import {Colors} from '../../constants/Colors';
+import MyTripStackNavigator from './myTrips/MyTripStackNavigator';
 
 const HomeScreenTab = createBottomTabNavigator();
 
@@ -23,7 +23,7 @@ export default function HomeStackNavigator() {
       }}>
       <HomeScreenTab.Screen
         name="My Trip"
-        component={MyTripScreen}
+        component={MyTripStackNavigator}
         options={{
           tabBarIcon: () => (
             <MapIcon

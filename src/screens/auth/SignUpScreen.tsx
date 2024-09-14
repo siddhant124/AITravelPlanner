@@ -12,8 +12,8 @@ import React, {useState} from 'react';
 import {ArrowLongLeftIcon} from 'react-native-heroicons/solid';
 import {createUserWithEmailAndPassword} from 'firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { auth } from '../../configs/FirebaseConfing';
-import { Colors } from '../../constants/Colors';
+import {auth} from '../../configs/FirebaseConfing';
+import {Colors} from '../../constants/Colors';
 
 export default function SignUpScreen({navigation}: {navigation: any}) {
   const [userName, setUserName] = useState('');
@@ -130,7 +130,9 @@ export default function SignUpScreen({navigation}: {navigation: any}) {
           onPress={() => {
             !isCreatingAccount && handleCreateAcount();
           }}>
-          <Text style={styles.buttonTextStyle}>Create Account</Text>
+          <Text style={styles.buttonTextStyle}>
+            {isCreatingAccount ? 'Creating account...' : 'Create Account'}
+          </Text>
         </TouchableOpacity>
 
         {/* Sign In */}
@@ -142,7 +144,7 @@ export default function SignUpScreen({navigation}: {navigation: any}) {
           }}
           style={[styles.buttonStyle, styles.signInButton]}>
           <Text style={[styles.buttonTextStyle, styles.signInText]}>
-            {isCreatingAccount ? 'Creating account...' : 'Sign In'}
+            Sign In
           </Text>
         </TouchableOpacity>
       </View>
