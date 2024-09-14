@@ -8,12 +8,14 @@ import {ActivityIndicator, View} from 'react-native';
 import SignInScreen from './src/screens/auth/SignInScreen';
 import SignUpScreen from './src/screens/auth/SignUpScreen';
 import HomeStackNavigator from './src/screens/home/HomeStackNavigator';
+import {CreateTripContext} from './context/CreateTripContext';
 
 const Stack = createNativeStackNavigator();
 
 export default function RootLayout() {
   const [authToken, setAuthToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true); // New loading state
+  const [tripData, setTripData] = useState<any>([]);
 
   const getAuthToken = async () => {
     try {
@@ -45,20 +47,22 @@ export default function RootLayout() {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{headerShown: false}}
-        initialRouteName={
-          authToken === null ? 'OnboardingScreen' : 'HomeStackNavigator'
-        }>
-        <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />
-        <Stack.Screen name="SignInScreen" component={SignInScreen} />
-        <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
-        <Stack.Screen
-          name="HomeStackNavigator"
-          component={HomeStackNavigator}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <CreateTripContext.Provider value={{tripData, setTripData}}>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{headerShown: false}}
+          initialRouteName={
+            authToken === null ? 'OnboardingScreen' : 'HomeStackNavigator'
+          }>
+          <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />
+          <Stack.Screen name="SignInScreen" component={SignInScreen} />
+          <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+          <Stack.Screen
+            name="HomeStackNavigator"
+            component={HomeStackNavigator}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </CreateTripContext.Provider>
   );
 }
