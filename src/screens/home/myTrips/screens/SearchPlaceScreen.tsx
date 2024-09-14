@@ -17,7 +17,7 @@ import React, {
   useState,
 } from 'react';
 import {Colors} from '../../../../constants/Colors';
-import {FeatureCollection} from './model/SearchPlaceDataClass';
+import {FeatureCollection} from '../model/SearchPlaceDataClass';
 import {getGeoapifyAutocompleteUrl} from '../../../../networkUrl/ApiUrls';
 import {CreateTripContext} from '../../../../../context/CreateTripContext';
 import {debounce} from 'lodash';

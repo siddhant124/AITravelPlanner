@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import {View, Text} from 'react-native';
 import React from 'react';
-import {TravelPlans} from '../createTrip/model/SelectTravellerDataClass';
+import {TravelPlans} from '../model/SelectTravellerDataClass';
 import {Colors} from '../../../../constants/Colors';
 
 export default function SelectTravellerOptionCard({

@@ -1,4 +1,4 @@
-import {TravelPlans} from '../screens/home/myTrips/createTrip/model/SelectTravellerDataClass';
+import {TravelPlans} from '../screens/home/myTrips/model/SelectTravellerDataClass';
 
 export const SelectTravelersList: TravelPlans[] = [
   {

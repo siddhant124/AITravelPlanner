@@ -11,7 +11,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {SelectTravelersList} from '../../../../constants/TravelOptions';
 import SelectTravellerOptionCard from '../component/SelectTravellerOptionCard';
 import {CreateTripContext} from '../../../../../context/CreateTripContext';
-import {TravelPlans} from './model/SelectTravellerDataClass';
+import {TravelPlans} from '../model/SelectTravellerDataClass';
 import {Colors} from '../../../../constants/Colors';
 
 export default function SelectTraveller({navigation}: {navigation: any}) {
@@ -38,7 +38,7 @@ export default function SelectTraveller({navigation}: {navigation: any}) {
   useEffect(() => {
     setTripData({
       ...tripData,
-      travellerCount: selectedTraveller,
+      travellerInfo: selectedTraveller,
     });
   }, [selectedTraveller]);
 
