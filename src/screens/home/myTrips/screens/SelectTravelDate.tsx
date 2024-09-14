@@ -42,9 +42,11 @@ export default function SelectTravelDate({navigation}: {navigation: any}) {
       console.log('numofdays', daysDifference + 1);
       setTripData({
         ...tripData,
-        startDate: startDate,
-        endDate: endDate,
-        totalNumOfDays: daysDifference,
+        tripDuration: {
+          startDate: startDate,
+          endDate: endDate,
+          totalNumOfDays: daysDifference,
+        },
       });
     } else {
       ToastAndroid.show('Please Select duration!', ToastAndroid.LONG);

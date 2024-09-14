@@ -1,10 +1,10 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
-import SearchPlacesScreen from './createTrip/SearchPlaceScreen';
-import MyTripScreen from './MyTripScreen';
-import SelectTraveller from './createTrip/SelectTraveller';
-import SelectTravelDate from './createTrip/SelectTravelDate';
+import SearchPlacesScreen from './screens/SearchPlaceScreen';
+import MyTripScreen from './screens/MyTripScreen';
+import SelectTraveller from './screens/SelectTraveller';
+import SelectTravelDate from './screens/SelectTravelDate';
 
 const MyTripStack = createNativeStackNavigator();
 

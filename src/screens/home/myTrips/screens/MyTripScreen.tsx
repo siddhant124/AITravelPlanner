@@ -2,8 +2,8 @@
 import {View, Text, StatusBar} from 'react-native';
 import React, {useState} from 'react';
 import {PlusCircleIcon} from 'react-native-heroicons/solid';
-import {Colors} from '../../../constants/Colors';
-import StartNewTripCard from './component/StartNewTripCard';
+import {Colors} from '../../../../constants/Colors';
+import StartNewTripCard from '../component/StartNewTripCard';
 
 export default function MyTrip({navigation}: {navigation: any}) {
   const [userTrips, _setUserTrips] = useState([]);
