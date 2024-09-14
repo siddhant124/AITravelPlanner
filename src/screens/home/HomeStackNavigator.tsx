@@ -20,6 +20,7 @@ export default function HomeStackNavigator() {
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: Colors.PRIMARY,
+        tabBarHideOnKeyboard: true,
       }}>
       <HomeScreenTab.Screen
         name="My Trip"
