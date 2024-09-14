@@ -31,7 +31,7 @@ export const SelectTravelersList: TravelPlans[] = [
   },
 ];
 
-export const SelectBudgetOptions = [
+export const SelectBudgetOptions: TravelPlans[] = [
   {
     id: 1,
     title: 'Cheap',

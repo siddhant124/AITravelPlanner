@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import {
   Text,
@@ -8,16 +7,17 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
-import {SelectTravelersList} from '../../../../constants/TravelOptions';
+import {SelectBudgetOptions} from '../../../../constants/TravelOptions';
 import SelectTravellerOptionCard from '../component/SelectTravellerOptionCard';
-import {CreateTripContext} from '../../../../../context/CreateTripContext';
 import {TravelPlans} from '../model/SelectTravellerDataClass';
 import {Colors} from '../../../../constants/Colors';
+import {CreateTripContext} from '../../../../../context/CreateTripContext';
 
-export default function SelectTraveller({navigation}: {navigation: any}) {
-  const [selectedTraveller, setSelectedTraveller] = useState<TravelPlans>(
-    SelectTravelersList[0],
+export default function SelectBudgetScreen({navigation}: {navigation: any}) {
+  const [selectedBudget, setSelectedBudget] = useState<TravelPlans>(
+    SelectBudgetOptions[0],
   );
+
   const tripContext = useContext(CreateTripContext);
 
   if (!tripContext) {
@@ -34,17 +34,9 @@ export default function SelectTraveller({navigation}: {navigation: any}) {
     });
   }, [navigation]);
 
-  // Update Trip Data
-  useEffect(() => {
-    setTripData({
-      ...tripData,
-      travellerInfo: selectedTraveller,
-    });
-  }, [selectedTraveller]);
-
-  useEffect(() => {
-    console.log('trip data', tripData);
-  }, [tripData]);
+  const handleBudgetSlection = () => {
+    setTripData({...tripData, budgetInfo: selectedBudget});
+  };
 
   return (
     <SafeAreaView className="pt-14 bg-white flex-1 px-6">
@@ -53,7 +45,7 @@ export default function SelectTraveller({navigation}: {navigation: any}) {
         style={{
           fontFamily: 'Outfit-Bold',
         }}>
-        Who's Travelling
+        Budget
       </Text>
 
       <View className="mt-4">
@@ -62,20 +54,20 @@ export default function SelectTraveller({navigation}: {navigation: any}) {
           style={{
             fontFamily: 'Outfit-Bold',
           }}>
-          Choose your travels
+          Choose spending habits for your trip
         </Text>
 
         <FlatList
-          data={SelectTravelersList}
+          data={SelectBudgetOptions}
           renderItem={({item}) => (
             <TouchableOpacity
               activeOpacity={0.6}
               onPress={() => {
-                setSelectedTraveller(item);
+                setSelectedBudget(item);
               }}>
               <SelectTravellerOptionCard
                 options={item}
-                selectedTravellerInfo={selectedTraveller}
+                selectedTravellerInfo={selectedBudget}
               />
             </TouchableOpacity>
           )}
@@ -86,9 +78,7 @@ export default function SelectTraveller({navigation}: {navigation: any}) {
       </View>
       <TouchableOpacity
         activeOpacity={0.6}
-        onPress={() => {
-          navigation.navigate('SelectTravelDate');
-        }}
+        onPress={() => handleBudgetSlection()}
         className="p-4 absolute bottom-6 w-full bg-black self-center rounded-2xl">
         <Text
           style={{
@@ -97,14 +87,7 @@ export default function SelectTraveller({navigation}: {navigation: any}) {
             fontSize: 17,
             textAlign: 'center',
           }}>
-          Continue with{'   '}
-          <Text
-            style={{
-              textAlign: 'center',
-              fontFamily: 'Outfit-Bold',
-            }}>
-            {selectedTraveller.title.toUpperCase()}
-          </Text>
+          Continue
         </Text>
       </TouchableOpacity>
     </SafeAreaView>

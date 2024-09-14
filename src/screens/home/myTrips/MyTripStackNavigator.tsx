@@ -5,6 +5,7 @@ import SearchPlacesScreen from './screens/SearchPlaceScreen';
 import MyTripScreen from './screens/MyTripScreen';
 import SelectTraveller from './screens/SelectTraveller';
 import SelectTravelDate from './screens/SelectTravelDate';
+import SelectBudgetScreen from './screens/SelectBudgetScreen';
 
 const MyTripStack = createNativeStackNavigator();
 
@@ -26,6 +27,11 @@ export default function MyTripStackNavigator() {
         <MyTripStack.Screen
           name="SelectTravelDate"
           component={SelectTravelDate}
+        />
+
+        <MyTripStack.Screen
+          name="SelectBudgetScreen"
+          component={SelectBudgetScreen}
         />
       </MyTripStack.Navigator>
     </NavigationContainer>

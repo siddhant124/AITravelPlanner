@@ -35,7 +35,7 @@ export default function SelectTravelDate({navigation}: {navigation: any}) {
     type === 'START_DATE' ? setStartDate(date) : setEndDate(date);
   };
 
-  const handleContinueClick = () => {
+  const handleDurationSelection = () => {
     if (startDate && endDate) {
       const numOfDays = endDate.getTime() - startDate.getTime();
       const daysDifference = numOfDays / (1000 * 60 * 60 * 24);
@@ -48,6 +48,7 @@ export default function SelectTravelDate({navigation}: {navigation: any}) {
           totalNumOfDays: daysDifference,
         },
       });
+      navigation.navigate('SelectBudgetScreen');
     } else {
       ToastAndroid.show('Please Select duration!', ToastAndroid.LONG);
     }
@@ -77,7 +78,7 @@ export default function SelectTravelDate({navigation}: {navigation: any}) {
 
       <TouchableOpacity
         activeOpacity={0.6}
-        onPress={() => handleContinueClick()}
+        onPress={() => handleDurationSelection()}
         className="p-4 absolute bottom-6 w-full bg-black self-center rounded-2xl">
         <Text
           style={{

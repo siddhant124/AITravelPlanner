@@ -13,7 +13,7 @@ export default function SelectTravellerOptionCard({
 }) {
   return (
     <View
-      className={`p-5 mt-4  flex-row rounded-lg justify-between border ${
+      className={`p-5 mt-4 flex-row rounded-lg justify-between border ${
         selectedTravellerInfo?.id === options?.id
           ? 'bg-blue-100 border-blue-300'
           : 'bg-gray-100  border-gray-300'

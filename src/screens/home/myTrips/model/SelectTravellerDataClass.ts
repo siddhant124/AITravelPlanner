@@ -7,5 +7,5 @@ export type TravelPlans = {
   title: string;
   desc: string;
   icon: string;
-  people: string;
+  people?: string;
 };
