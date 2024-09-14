@@ -4,6 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import SearchPlacesScreen from './createTrip/SearchPlaceScreen';
 import MyTripScreen from './MyTripScreen';
 import SelectTraveller from './createTrip/SelectTraveller';
+import SelectTravelDate from './createTrip/SelectTravelDate';
 
 const MyTripStack = createNativeStackNavigator();
 
@@ -20,6 +21,11 @@ export default function MyTripStackNavigator() {
         <MyTripStack.Screen
           name="SelectTraveller"
           component={SelectTraveller}
+        />
+
+        <MyTripStack.Screen
+          name="SelectTravelDate"
+          component={SelectTravelDate}
         />
       </MyTripStack.Navigator>
     </NavigationContainer>

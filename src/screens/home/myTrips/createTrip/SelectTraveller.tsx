@@ -83,7 +83,10 @@ export default function SelectTraveller({navigation}: {navigation: any}) {
       </View>
       <TouchableOpacity
         activeOpacity={0.6}
-        className="p-4 mt-10 bg-black items-center rounded-2xl self-center">
+        onPress={() => {
+          navigation.navigate('SelectTravelDate');
+        }}
+        className="p-4 absolute bottom-6 w-full bg-black self-center rounded-2xl">
         <Text
           style={{
             color: Colors.WHITE,
