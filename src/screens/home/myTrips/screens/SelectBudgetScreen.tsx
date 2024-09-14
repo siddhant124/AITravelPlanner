@@ -36,6 +36,7 @@ export default function SelectBudgetScreen({navigation}: {navigation: any}) {
 
   const handleBudgetSlection = () => {
     setTripData({...tripData, budgetInfo: selectedBudget});
+    navigation.navigate('ReviewTripScreen');
   };
 
   return (
