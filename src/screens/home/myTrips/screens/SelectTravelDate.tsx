@@ -38,14 +38,14 @@ export default function SelectTravelDate({navigation}: {navigation: any}) {
   const handleDurationSelection = () => {
     if (startDate && endDate) {
       const numOfDays = endDate.getTime() - startDate.getTime();
-      const daysDifference = numOfDays / (1000 * 60 * 60 * 24);
+      const daysDifference = numOfDays / (1000 * 60 * 60 * 24) + 1;
       console.log('numofdays', daysDifference + 1);
       setTripData({
         ...tripData,
         tripDuration: {
           startDate: startDate,
           endDate: endDate,
-          totalNumOfDays: daysDifference,
+          totalNumOfDays: daysDifference + ' Days',
         },
       });
       navigation.navigate('SelectBudgetScreen');
