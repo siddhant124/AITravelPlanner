@@ -20,10 +20,12 @@ export default function ReviewTripScreen({navigation}: {navigation: any}) {
   }
 
   const {tripData} = tripContext;
+
   const tripDates = formatTripDates(
     tripData?.tripDuration?.startDate,
     tripData?.tripDuration?.endDate,
   );
+
 
   useEffect(() => {
     navigation.setOptions({
@@ -35,6 +37,7 @@ export default function ReviewTripScreen({navigation}: {navigation: any}) {
 
   const handleGenerateTrip = () => {
     console.log('first');
+    navigation.navigate('GenerateTripScreen');
   };
 
   return (
@@ -72,7 +75,7 @@ export default function ReviewTripScreen({navigation}: {navigation: any}) {
             tripDates.endDate +
             ' (' +
             tripData?.tripDuration?.totalNumOfDays +
-            ')'
+            ' Days)'
           }
         />
         <ReviewTripCard

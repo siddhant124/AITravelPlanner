@@ -45,7 +45,7 @@ export default function SelectTravelDate({navigation}: {navigation: any}) {
         tripDuration: {
           startDate: startDate,
           endDate: endDate,
-          totalNumOfDays: daysDifference + ' Days',
+          totalNumOfDays: daysDifference,
         },
       });
       navigation.navigate('SelectBudgetScreen');
