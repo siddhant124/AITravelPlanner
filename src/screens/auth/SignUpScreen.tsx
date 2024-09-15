@@ -11,7 +11,6 @@ import {
 import React, {useState} from 'react';
 import {ArrowLongLeftIcon} from 'react-native-heroicons/solid';
 import {createUserWithEmailAndPassword} from 'firebase/auth';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {auth} from '../../configs/FirebaseConfing';
 import {Colors} from '../../constants/Colors';
 
@@ -34,7 +33,7 @@ export default function SignUpScreen({navigation}: {navigation: any}) {
         const user = userCredential.user;
         ToastAndroid.show('Account created successsfully', ToastAndroid.LONG);
         console.log('user details', user);
-        AsyncStorage.setItem('authToken', await user.getIdToken(false));
+        // AsyncStorage.setItem('authToken', await user.getIdToken(false));
         navigation.navigate('HomeStackNavigator');
       })
       .catch(error => {
