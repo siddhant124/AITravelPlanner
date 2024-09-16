@@ -51,9 +51,10 @@ export default function GenerateTripScreen({navigation}: {navigation: any}) {
       const documentId = Date.now();
 
       await setDoc(doc(db, 'UserTrips', documentId.toString()), {
-        userEmailId: JSON.stringify(user?.email) ?? '',
+        userEmailId: user?.email ?? '',
         tripRequestData: tripData,
         tripResponseDetails: tripResponse,
+        docId: documentId,
       });
       ToastAndroid.show('Trip Generated Successfully', ToastAndroid.LONG);
       navigation.navigate('MyTripScreen');
@@ -70,8 +71,8 @@ export default function GenerateTripScreen({navigation}: {navigation: any}) {
   };
 
   useEffect(() => {
-    tripData && GenerateAITrip();
-  }, [tripData]);
+    GenerateAITrip();
+  }, []);
 
   return (
     <SafeAreaView className="pt-14 bg-[#78B3D4] flex-1 px-6">

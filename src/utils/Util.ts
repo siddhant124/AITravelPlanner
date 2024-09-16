@@ -1,26 +1,22 @@
-function formatDate(dateString: string, includeYear: boolean = true): string {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('en-GB', {
-    day: 'numeric', // 26
-    month: 'short', // Sept
-    ...(includeYear && {year: 'numeric'}), // Only include year if `includeYear` is true
-  });
-}
+export function formatTripDates(startDate: string, endDate: string) {
+  // Parse the dates to extract day, month, and year
+  const startDateParts = startDate.split(' ');
+  const endDateParts = endDate.split(' ');
 
-export function formatTripDates(
-  startDateString: string,
-  endDateString: string,
-): {startDate: string; endDate: string} {
-  const startDate = new Date(startDateString);
-  const endDate = new Date(endDateString);
+  // Extract the years from both dates
+  const startYear = startDateParts[2];
+  const endYear = endDateParts[2];
 
-  const includeYear = startDate.getFullYear() !== endDate.getFullYear();
-
-  const formattedStartDate = formatDate(startDateString, includeYear);
-  const formattedEndDate = formatDate(endDateString, includeYear);
-
-  return {
-    startDate: formattedStartDate,
-    endDate: formattedEndDate,
-  };
+  // Check if years are the same
+  if (startYear === endYear) {
+    // Return without the year
+    // return `${startDateParts[0]} ${startDateParts[1]} to ${endDateParts[0]} ${endDateParts[1]}`;
+    return {
+      startDate: `${startDateParts[0]} ${startDateParts[1]}`,
+      endDate: `${endDateParts[0]} ${endDateParts[1]}`,
+    };
+  } else {
+    // Return with the year
+    return {startDate: startDate, endDate: endDate};
+  }
 }

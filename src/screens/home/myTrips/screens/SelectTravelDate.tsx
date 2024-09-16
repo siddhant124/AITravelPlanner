@@ -39,15 +39,27 @@ export default function SelectTravelDate({navigation}: {navigation: any}) {
     if (startDate && endDate) {
       const numOfDays = endDate.getTime() - startDate.getTime();
       const daysDifference = numOfDays / (1000 * 60 * 60 * 24) + 1;
+
+      // Format the dates as "DD MMM YYYY"
+      const options: Intl.DateTimeFormatOptions = {
+        day: '2-digit', // Correct type is '2-digit' | 'numeric'
+        month: 'short', // Correct type is 'short' | 'long' | 'narrow'
+        year: 'numeric', // Correct type is 'numeric'
+      };
+
+      const formattedStartDate = startDate.toLocaleDateString('en-GB', options);
+      const formattedEndDate = endDate.toLocaleDateString('en-GB', options);
+
       console.log('numofdays', daysDifference + 1);
       setTripData({
         ...tripData,
         tripDuration: {
-          startDate: startDate,
-          endDate: endDate,
+          startDate: formattedStartDate,
+          endDate: formattedEndDate,
           totalNumOfDays: daysDifference,
         },
       });
+
       navigation.navigate('SelectBudgetScreen');
     } else {
       ToastAndroid.show('Please Select duration!', ToastAndroid.LONG);
