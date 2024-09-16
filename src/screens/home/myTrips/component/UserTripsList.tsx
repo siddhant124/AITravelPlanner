@@ -17,7 +17,7 @@ export default function UserTripsList({
       <View className="mb-6">
         <Image
           source={require('./../../../../assets/images/placeholder_image.jpg')}
-          className="w-full h-52 object-cover rounded-3xl"
+          className="w-full h-44 object-cover rounded-3xl"
         />
         <Text
           className=" mt-4 text-xl text-black"
