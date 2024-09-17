@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import {View, Text, ActivityIndicator} from 'react-native';
 import React, {useEffect, useState} from 'react';
@@ -14,34 +13,40 @@ import {
   DocumentData,
 } from 'firebase/firestore';
 import UserTripsList from '../component/UserTripsList';
+import {onAuthStateChanged} from 'firebase/auth';
 
 export default function MyTrip({navigation}: {navigation: any}) {
   const [userTrips, setUserTrips] = useState<DocumentData[]>([]);
-  const user = auth.currentUser;
+  const [user, setUser] = useState(auth.currentUser);
   const [isLoading, setIsLoading] = useState(false);
 
-  const getMyTripsData = async () => {
+  const getMyTripsData = async (email: string | null) => {
+    if (!email) {return;}
     setIsLoading(true);
     setUserTrips([]);
     const q = query(
       collection(db, 'UserTrips'),
-      where('userEmailId', '==', user?.email),
+      where('userEmailId', '==', email),
     );
 
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach(doc => {
-      // doc.data() is never undefined for query doc snapshots
       console.log(doc.id, ' => ', doc.data());
-      setUserTrips(prev => {
-        return [...prev, doc.data()];
-      });
+      setUserTrips(prev => [...prev, doc.data()]);
     });
     setIsLoading(false);
   };
 
   useEffect(() => {
-    user && getMyTripsData();
-  }, [user]);
+    const unsubscribe = onAuthStateChanged(auth, currentUser => {
+      setUser(currentUser);
+      if (currentUser?.email) {
+        getMyTripsData(currentUser.email);
+      }
+    });
+
+    return () => unsubscribe(); // Clean up the listener on unmount
+  }, []);
 
   if (isLoading) {
     return (
@@ -59,7 +64,6 @@ export default function MyTrip({navigation}: {navigation: any}) {
         paddingHorizontal: 24,
         flex: 1,
       }}>
-      {/* <StatusBar backgroundColor={Colors.WHITE} barStyle={'dark-content'} /> */}
       <View
         style={{
           display: 'flex',
@@ -73,7 +77,7 @@ export default function MyTrip({navigation}: {navigation: any}) {
             fontSize: 30,
             color: Colors.PRIMARY,
           }}>
-          My Trip
+          {'My Trip' + user?.email}
         </Text>
         <PlusCircleIcon
           onPress={() => navigation.navigate('SearchPlacesScreen')}
@@ -81,7 +85,7 @@ export default function MyTrip({navigation}: {navigation: any}) {
           size={30}
         />
       </View>
-      {userTrips?.length === 0 ? (
+      {userTrips.length === 0 ? (
         <StartNewTripCard navigation={navigation} />
       ) : (
         <UserTripsList userTrips={userTrips.reverse()} />
