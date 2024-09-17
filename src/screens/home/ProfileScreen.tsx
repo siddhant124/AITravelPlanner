@@ -1,11 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 import {Text, SafeAreaView, TouchableOpacity} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Colors} from '../../constants/Colors';
-import {signOut} from 'firebase/auth';
+import {onAuthStateChanged, signOut} from 'firebase/auth';
 import {auth} from '../../configs/FirebaseConfing';
 
 export default function ProfileScreen({navigation}: {navigation: any}) {
+  const [user, setUser] = useState(auth.currentUser);
+
   useEffect(() => {
     navigation.setOptions({
       headerShown: true,
@@ -18,6 +20,14 @@ export default function ProfileScreen({navigation}: {navigation: any}) {
       },
     });
   }, [navigation]);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, currentUser => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe(); // Clean up the listener on unmount
+  }, []);
 
   const handloeUserSignOut = () => {
     signOut(auth)
@@ -35,6 +45,7 @@ export default function ProfileScreen({navigation}: {navigation: any}) {
   return (
     <SafeAreaView className="pt-14 px-6 bg-white flex-1">
       <Text>ProfileScreen</Text>
+      <Text>{user?.email ?? 'sigin to get details'}</Text>
 
       <TouchableOpacity
         activeOpacity={0.6}
