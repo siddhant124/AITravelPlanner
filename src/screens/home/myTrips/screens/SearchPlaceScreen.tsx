@@ -232,7 +232,9 @@ export default function SearchPlacesScreen({navigation}: {navigation: any}) {
                 backgroundColor: Colors.PRIMARY,
                 borderRadius: 15,
               }}
-              onPress={() => navigation.navigate('SelectTraveller')}>
+              onPress={() => {
+                navigation.navigate('SelectTraveller');
+              }}>
               <Text
                 style={{
                   color: Colors.WHITE,

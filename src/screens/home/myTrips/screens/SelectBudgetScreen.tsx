@@ -26,16 +26,37 @@ export default function SelectBudgetScreen({navigation}: {navigation: any}) {
 
   const {tripData, setTripData} = tripContext;
 
+  const [placeImagUrl, setPlaceImageUrl] = useState('');
+
+  const GetPlaceImage = async () => {
+    try {
+      const response = await fetch(
+        `https://unsplash.com/napi/search/photos?page=1&per_page=1&query=${tripData?.locationInfo?.name}`,
+      );
+      const json = await response.json();
+      console.log('responseee', json.results[0].urls.raw);
+      setPlaceImageUrl(json.results[0].urls.raw);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
+    GetPlaceImage();
     navigation.setOptions({
       headerShown: true,
       headerTransparent: true,
       headerTitle: '',
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigation]);
 
   const handleBudgetSlection = () => {
-    setTripData({...tripData, budgetInfo: selectedBudget});
+    setTripData({
+      ...tripData,
+      budgetInfo: selectedBudget,
+      placeImagUrl: placeImagUrl,
+    });
     navigation.navigate('ReviewTripScreen');
   };
 

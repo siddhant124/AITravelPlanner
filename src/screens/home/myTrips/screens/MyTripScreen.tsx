@@ -17,11 +17,13 @@ import {onAuthStateChanged} from 'firebase/auth';
 
 export default function MyTrip({navigation}: {navigation: any}) {
   const [userTrips, setUserTrips] = useState<DocumentData[]>([]);
-  const [user, setUser] = useState(auth.currentUser);
+  const [_user, setUser] = useState(auth.currentUser);
   const [isLoading, setIsLoading] = useState(false);
 
   const getMyTripsData = async (email: string | null) => {
-    if (!email) {return;}
+    if (!email) {
+      return;
+    }
     setIsLoading(true);
     setUserTrips([]);
     const q = query(
@@ -61,7 +63,7 @@ export default function MyTrip({navigation}: {navigation: any}) {
       style={{
         backgroundColor: Colors.WHITE,
         paddingTop: 24,
-        paddingHorizontal: 24,
+        paddingHorizontal: 16,
         flex: 1,
       }}>
       <View
@@ -77,7 +79,7 @@ export default function MyTrip({navigation}: {navigation: any}) {
             fontSize: 30,
             color: Colors.PRIMARY,
           }}>
-          {'My Trip' + user?.email}
+          My Trip
         </Text>
         <PlusCircleIcon
           onPress={() => navigation.navigate('SearchPlacesScreen')}
@@ -88,7 +90,10 @@ export default function MyTrip({navigation}: {navigation: any}) {
       {userTrips.length === 0 ? (
         <StartNewTripCard navigation={navigation} />
       ) : (
-        <UserTripsList userTrips={userTrips.reverse()} />
+        <UserTripsList
+          navigation={navigation}
+          userTrips={userTrips.reverse()}
+        />
       )}
     </View>
   );

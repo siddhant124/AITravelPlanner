@@ -43,6 +43,7 @@ export default function GenerateTripScreen({navigation}: {navigation: any}) {
         .replace('{traveler}', tripData?.travellerInfo?.people)
         .replace('{budget}', tripData?.budgetInfo?.title);
 
+      console.log('Final prompt json', tripData);
       console.log('Final prompt', FINAL_PROMPT);
       const result = await chatSession.sendMessage(FINAL_PROMPT);
       const tripResponse = JSON.parse(result.response.text());
@@ -76,7 +77,7 @@ export default function GenerateTripScreen({navigation}: {navigation: any}) {
 
   return (
     <SafeAreaView className="pt-14 bg-[#78B3D4] flex-1 px-6">
-      <StatusBar backgroundColor={'#78B3D4'} />
+      <StatusBar backgroundColor={'#78B3D4'} barStyle={'dark-content'} />
       <Text
         className="text-4xl text-black mt-5 text-center"
         style={{

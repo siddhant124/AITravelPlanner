@@ -7,6 +7,7 @@ import SelectTravelDate from './screens/SelectTravelDate';
 import SelectBudgetScreen from './screens/SelectBudgetScreen';
 import ReviewTripScreen from './screens/ReviewTripScreen';
 import GenerateTripScreen from './screens/GenerateTripScreen';
+import TripDetailsScreen from './screens/TripDetailsScreen';
 
 const MyTripStack = createNativeStackNavigator();
 
@@ -39,6 +40,11 @@ export default function MyTripStackNavigator() {
       <MyTripStack.Screen
         name="GenerateTripScreen"
         component={GenerateTripScreen}
+      />
+
+      <MyTripStack.Screen
+        name="TripDetailsScreen"
+        component={TripDetailsScreen}
       />
     </MyTripStack.Navigator>
   );

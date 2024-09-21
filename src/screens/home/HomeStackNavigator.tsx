@@ -27,7 +27,8 @@ function getTabBarStyle(route: any): any {
     routeName === 'SelectTravelDate' ||
     routeName === 'SelectBudgetScreen' ||
     routeName === 'ReviewTripScreen' ||
-    routeName === 'GenerateTripScreen'
+    routeName === 'GenerateTripScreen' ||
+    routeName === 'TripDetailsScreen'
   ) {
     return {display: 'none'}; // Hide tab bar
   }
