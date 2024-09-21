@@ -26,7 +26,6 @@ export default function ReviewTripScreen({navigation}: {navigation: any}) {
     tripData?.tripDuration?.endDate,
   );
 
-
   useEffect(() => {
     navigation.setOptions({
       headerShown: true,
@@ -36,7 +35,6 @@ export default function ReviewTripScreen({navigation}: {navigation: any}) {
   }, [navigation]);
 
   const handleGenerateTrip = () => {
-    console.log('first');
     navigation.navigate('GenerateTripScreen');
   };
 

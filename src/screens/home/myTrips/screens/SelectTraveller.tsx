@@ -42,10 +42,6 @@ export default function SelectTraveller({navigation}: {navigation: any}) {
     });
   }, [selectedTraveller]);
 
-  useEffect(() => {
-    console.log('trip data', tripData);
-  }, [tripData]);
-
   return (
     <SafeAreaView className="pt-14 bg-white flex-1 px-6">
       <Text
